@@ -104,6 +104,16 @@
       background: var(--primary);
       color: white;
     }
+    .btn-small {
+      padding: 6px 12px;
+      font-size: 0.8rem;
+    }
+    .btn-danger {
+      background-color: #dc3545;
+    }
+    .btn-danger:hover {
+      background-color: #c82333;
+    }
 
     /* Navigation with Badge */
     .navbar {
@@ -1061,12 +1071,13 @@
       </div>
     </section>
 
-    <!-- ========== NEW DOCS SECTION (ADDED WITHOUT CHANGING ANYTHING ELSE) ========== -->
+    <!-- ========== DOCS SECTION ========== -->
     <section id="docs">
-      <h2>Club Documents</h2>
-      <div class="docs-grid" id="officialDocsContainer">
-        <!-- Documents will be loaded here dynamically -->
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+        <h2 style="margin-bottom: 0;">Club Documents</h2>
+        <button id="addDocumentBtn"></button>
       </div>
+      <div class="docs-grid" id="officialDocsContainer"></div>
 
       <div style="margin-top: 48px;">
         <h2>Player Document Submissions</h2>
@@ -1078,7 +1089,7 @@
               <button id="submitPlayerDocBtn" class="btn btn-gold">Submit Document</button>
             </div>
             <div class="upload-box">
-              <p><strong>📌 How it works</strong><br>Submit your contract or supporting document. After submission, the file will appear in the list below with a download button. Admin can edit or delete submissions.</p>
+              <p><strong>📌 How it works</strong><br>Submit your contract or supporting document. After submission, the file will appear in the list below with a download button. Admin can delete submissions.</p>
             </div>
           </div>
           <div id="playerSubmissionsList" class="submissions-list"></div>
@@ -1176,7 +1187,7 @@
 </footer>
 
 <div class="whatsapp-float">
-  <a href="https://wa.me/+256778402181?text=Hello%20TechwithCymon%2C%20I%27m%20interested%20in%20your%20services!" target="_blank" aria-label="Chat on WhatsApp">
+  <a href="https://wa.me/+256778402181?text=Hello%20Storm%20FC%2C%20I%27m%20interested%20in%20your%20club!" target="_blank" aria-label="Chat on WhatsApp">
     <i class="fab fa-whatsapp"></i>
   </a>
 </div>
@@ -1242,7 +1253,6 @@
   ];
   let uploadedVideos = JSON.parse(localStorage.getItem('stormfc_uploaded_videos')) || [];
 
-  // Original rendering functions
   function renderInitialPlayers() {
     document.getElementById('playersGrid').innerHTML = corePlayers.map(p => `<div class="card" onclick="openPlayerModal(${p.id})"><img class="card-img" src="${p.img}"><div class="card-content"><h3>${p.name}</h3><p>${p.position} • #${p.number}</p><small>Click for bio</small></div></div>`).join('');
     document.getElementById('morePlayersContainer').innerHTML = '';
@@ -1291,13 +1301,21 @@
   
   function escapeHtml(str) { return str.replace(/[&<>]/g, function(m){ if(m==='&') return '&amp;'; if(m==='<') return '&lt;'; if(m==='>') return '&gt;'; return m;}); }
   
-  // ========== DOCUMENTS SECTION LOGIC (ADDED) ==========
+  // ========== DOCUMENTS SECTION LOGIC ==========
   const ADMIN_PASSWORD = "storm";
-  let isAdminAuthenticated = false;
   let officialDocs = JSON.parse(localStorage.getItem('stormfc_official_docs')) || [];
   let playerSubmissions = JSON.parse(localStorage.getItem('stormfc_player_docs')) || [];
   let pendingDeleteId = null;
-  let pendingEditDoc = null;
+
+  // Add default documents if none exist
+  if (officialDocs.length === 0) {
+    officialDocs = [
+      { id: "doc1", title: "Club Constitution", category: "Policy", fileName: "storm_fc_constitution.pdf", fileData: null, date: "Jan 15, 2026" },
+      { id: "doc2", title: "Player Code of Conduct", category: "Rules", fileName: "player_code_of_conduct.pdf", fileData: null, date: "Jan 20, 2026" },
+      { id: "doc3", title: "Sponsorship Package 2026", category: "General", fileName: "sponsorship_package.pdf", fileData: null, date: "Feb 1, 2026" }
+    ];
+    localStorage.setItem('stormfc_official_docs', JSON.stringify(officialDocs));
+  }
 
   function getFileIcon(fileName) {
     const ext = fileName.split('.').pop().toLowerCase();
@@ -1309,14 +1327,14 @@
 
   function renderOfficialDocs() {
     const container = document.getElementById('officialDocsContainer');
-    if (officialDocs.length === 0) { container.innerHTML = '<p><em>No documents added yet. Admin can add documents.</em></p>'; return; }
+    if (officialDocs.length === 0) { container.innerHTML = '<p><em>No documents available. Admin can add documents using the button above.</em></p>'; return; }
     container.innerHTML = officialDocs.map(doc => `
       <div class="doc-card">
         <div class="doc-icon"><i class="fas ${getFileIcon(doc.fileName)}"></i></div>
         <div>
           <div class="doc-title">${escapeHtml(doc.title)}</div>
           <div class="doc-meta">${escapeHtml(doc.category)} • ${escapeHtml(doc.fileName)} • ${doc.date}</div>
-          ${doc.fileData ? `<button class="btn btn-outline btn-small" onclick="downloadDoc('${doc.id}')"><i class="fas fa-download"></i> Download</button>` : ''}
+          <button class="btn btn-outline btn-small" onclick="downloadDoc('${doc.id}')"><i class="fas fa-download"></i> Download</button>
         </div>
       </div>
     `).join('');
@@ -1337,16 +1355,34 @@
     `).join('');
   }
 
-  window.downloadDoc = (id) => { const doc = officialDocs.find(d => d.id === id); if(doc && doc.fileData) { const a = document.createElement('a'); a.href = doc.fileData; a.download = doc.fileName; a.click(); } };
-  window.downloadSubmission = (id) => { const sub = playerSubmissions.find(s => s.id === id); if(sub && sub.fileData) { const a = document.createElement('a'); a.href = sub.fileData; a.download = sub.fileName; a.click(); } };
+  window.downloadDoc = (id) => { 
+    const doc = officialDocs.find(d => d.id === id); 
+    if(doc && doc.fileData) { 
+      const a = document.createElement('a'); 
+      a.href = doc.fileData; 
+      a.download = doc.fileName; 
+      a.click(); 
+    } else {
+      alert('This document file is not available for download. Admin needs to upload the actual file.');
+    }
+  };
+  
+  window.downloadSubmission = (id) => { 
+    const sub = playerSubmissions.find(s => s.id === id); 
+    if(sub && sub.fileData) { 
+      const a = document.createElement('a'); 
+      a.href = sub.fileData; 
+      a.download = sub.fileName; 
+      a.click(); 
+    } 
+  };
+  
   window.deleteDocPrompt = (id) => { pendingDeleteId = id; document.getElementById('adminPasswordModal').style.display = 'flex'; };
   window.deleteSubmissionPrompt = (id) => { pendingDeleteId = id; document.getElementById('adminPasswordModal').style.display = 'flex'; };
-  window.editDocPrompt = (id) => { pendingEditDoc = officialDocs.find(d => d.id === id); document.getElementById('adminPasswordModal').style.display = 'flex'; };
 
   function verifyAdminAndExecute() {
     const pwd = document.getElementById('adminPasswordInput').value;
     if (pwd === ADMIN_PASSWORD) {
-      isAdminAuthenticated = true;
       document.getElementById('adminPasswordModal').style.display = 'none';
       if (pendingDeleteId) {
         officialDocs = officialDocs.filter(d => d.id !== pendingDeleteId);
@@ -1355,30 +1391,6 @@
         savePlayerSubmissions();
         pendingDeleteId = null;
         alert('Deleted successfully');
-      } else if (pendingEditDoc) {
-        const newTitle = prompt('Edit document title:', pendingEditDoc.title);
-        if (newTitle) { pendingEditDoc.title = newTitle; saveOfficialDocs(); alert('Updated'); }
-        pendingEditDoc = null;
-      } else {
-        const title = prompt('Enter document title:');
-        if (title) {
-          const fileInput = document.createElement('input');
-          fileInput.type = 'file';
-          fileInput.accept = '.pdf,.docx,.jpg,.png,.jpeg';
-          fileInput.onchange = (e) => {
-            const file = e.target.files[0];
-            if (file) {
-              const reader = new FileReader();
-              reader.onload = (ev) => {
-                officialDocs.unshift({ id: Date.now().toString(), title: title, category: 'General', fileName: file.name, fileData: ev.target.result, date: new Date().toLocaleString() });
-                saveOfficialDocs();
-                alert('Document added');
-              };
-              reader.readAsDataURL(file);
-            }
-          };
-          fileInput.click();
-        }
       }
       document.getElementById('adminPasswordInput').value = '';
       document.getElementById('adminError').style.display = 'none';
@@ -1402,22 +1414,37 @@
       savePlayerSubmissions();
       document.getElementById('playerName').value = '';
       fileInput.value = '';
-      alert('Document submitted!');
+      alert('Document submitted successfully!');
     };
     reader.readAsDataURL(file);
   });
 
-  document.getElementById('verifyAdminBtn').addEventListener('click', verifyAdminAndExecute);
-  document.getElementById('adminModalClose').addEventListener('click', () => { document.getElementById('adminPasswordModal').style.display = 'none'; pendingDeleteId = null; pendingEditDoc = null; });
-  document.getElementById('adminPasswordInput').addEventListener('keypress', (e) => { if (e.key === 'Enter') verifyAdminAndExecute(); });
+  document.getElementById('addDocumentBtn').addEventListener('click', () => {
+    const title = prompt('Enter document title:');
+    if (!title) return;
+    const category = prompt('Enter category (General/Rules/Policy/Contract):', 'General');
+    if (!category) return;
+    const fileInput = document.createElement('input');
+    fileInput.type = 'file';
+    fileInput.accept = '.pdf,.docx,.jpg,.png,.jpeg';
+    fileInput.onchange = (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (ev) => {
+          officialDocs.unshift({ id: Date.now().toString(), title: title, category: category, fileName: file.name, fileData: ev.target.result, date: new Date().toLocaleString() });
+          saveOfficialDocs();
+          alert('Document added successfully!');
+        };
+        reader.readAsDataURL(file);
+      }
+    };
+    fileInput.click();
+  });
 
-  // Add Document Button (Admin only)
-  const addDocBtn = document.createElement('button');
-  addDocBtn.className = 'btn btn-gold';
-  addDocBtn.style.marginLeft = '16px';
-  addDocBtn.innerHTML = '<i class="fas fa-plus"></i> Add Document (Admin)';
-  addDocBtn.onclick = () => { pendingDeleteId = null; pendingEditDoc = null; document.getElementById('adminPasswordModal').style.display = 'flex'; };
-  document.querySelector('#docs h2').appendChild(addDocBtn);
+  document.getElementById('verifyAdminBtn').addEventListener('click', verifyAdminAndExecute);
+  document.getElementById('adminModalClose').addEventListener('click', () => { document.getElementById('adminPasswordModal').style.display = 'none'; pendingDeleteId = null; });
+  document.getElementById('adminPasswordInput').addEventListener('keypress', (e) => { if (e.key === 'Enter') verifyAdminAndExecute(); });
 
   renderInitialPlayers(); renderNews(); renderFixtures(); renderCoaches(); renderMatchVideos(); renderGallery(); renderOfficialDocs(); renderPlayerSubmissions();
 </script>
