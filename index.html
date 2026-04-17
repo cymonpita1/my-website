@@ -1413,6 +1413,9 @@
 
   // Add Document Button (Admin only)
   const addDocBtn = document.createElement('button');
+  addDocBtn.className = 'btn btn-gold';
+  addDocBtn.style.marginLeft = '16px';
+  addDocBtn.innerHTML = '<i class="fas fa-plus"></i> Add Document (Admin)';
   addDocBtn.onclick = () => { pendingDeleteId = null; pendingEditDoc = null; document.getElementById('adminPasswordModal').style.display = 'flex'; };
   document.querySelector('#docs h2').appendChild(addDocBtn);
 
