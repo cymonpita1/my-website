@@ -104,16 +104,6 @@
       background: var(--primary);
       color: white;
     }
-    .btn-small {
-      padding: 6px 12px;
-      font-size: 0.8rem;
-    }
-    .btn-danger {
-      background-color: #dc3545;
-    }
-    .btn-danger:hover {
-      background-color: #c82333;
-    }
 
     /* Navigation with Badge */
     .navbar {
@@ -835,79 +825,6 @@
       transform: scale(1.07); 
       background: #20b859; 
     }
-
-    /* ========== DOCS SECTION STYLES ========== */
-    .docs-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 30px;
-      margin-bottom: 50px;
-    }
-    .doc-card {
-      background: white;
-      border-radius: 16px;
-      padding: 24px;
-      box-shadow: var(--shadow-sm);
-      transition: all 0.2s;
-      border-left: 4px solid var(--secondary);
-    }
-    .doc-card:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-md);
-    }
-    .doc-icon {
-      font-size: 2rem;
-      color: var(--secondary);
-      margin-bottom: 12px;
-    }
-    .doc-title {
-      font-size: 1.3rem;
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
-    .doc-meta {
-      color: var(--text-muted);
-      font-size: 0.8rem;
-      margin-bottom: 16px;
-    }
-    .player-upload-section {
-      background: white;
-      border-radius: 20px;
-      padding: 24px;
-      margin-top: 30px;
-      box-shadow: var(--shadow-sm);
-    }
-    .flex-forms {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 30px;
-    }
-    .upload-box {
-      flex: 1;
-      min-width: 250px;
-    }
-    .upload-box input, .upload-box select {
-      margin: 12px 0;
-      width: 100%;
-      padding: 12px;
-      border: 1px solid #e2e8f0;
-      border-radius: 12px;
-    }
-    .submissions-list {
-      margin-top: 20px;
-      max-height: 300px;
-      overflow-y: auto;
-    }
-    .submission-item {
-      background: #f1f5f9;
-      padding: 12px;
-      border-radius: 12px;
-      margin-bottom: 10px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-    }
   </style>
 </head>
 <body>
@@ -924,8 +841,8 @@
       <li><a href="#team" class="nav-link">Squad</a></li>
       <li><a href="#fixtures" class="nav-link">Fixtures</a></li>
       <li><a href="#news" class="nav-link">News</a></li>
+      <li><a href="docs.html" class="nav-link">Documents</a></li>
       <li><a href="#gallery" class="nav-link">Gallery</a></li>
-      <li><a href="#docs" class="nav-link">Documents</a></li>
       <li><a href="#contact" class="nav-link">Contact</a></li>
     </ul>
   </div>
@@ -1002,19 +919,41 @@
       <h2>About Us</h2>
       <div class="about-grid">
         <div class="about-card">
-          <div class="about-icon"><i class="fas fa-futbol"></i></div>
+          <div class="about-icon"><i class="fas-futbol"></i></div>
           <h3>Club History</h3>
-          <p>Storm FC was founded in 2026 with the vision of building a modern, community-driven football club focused on youth development and attacking football...</p>
+          <p>
+            Storm FC was founded in 2026 with the vision of building a modern, community-driven football 
+            club focused on youth development and attacking football. Established by 
+            a group of players who have the love and passion for football, the club aimed to create 
+            opportunities for young talent while competing at a high level.
+
+            In its inaugural season, Storm FC quickly gained attention for its energetic
+            playing style and strong connection with supporters. The club's identity symbolized by resilience, 
+            speed, and intensity was reflected both on and off the pitch.
+          </p>
         </div>
         <div class="about-card">
           <div class="about-icon"><i class="fas fa-map-marker-alt"></i></div>
           <h3>Match Ground</h3>
-          <p>The club hosts its home matches at St. Janan School Pitch located in Kabalagala...</p>
+          <p>
+            The club hosts its home matches at St. Janan School Pitch located in Kabalagala, a modest but
+             vibrant venue that quickly became a gathering point for loyal supporters. 
+             Training sessions are held at Bukasa Catholic Church Field, where the team developed its identity built on discipline, 
+            teamwork, and resilience.
+          </p>
         </div>
         <div class="about-card">
           <div class="about-icon"><i class="fas fa-eye"></i></div>
           <h3>Mission & Vision</h3>
-          <p><strong>Mission:</strong> To develop talented players... <strong>Vision:</strong> To become a leading football club in Bukasa.</p>
+          <p>
+            <strong>Mission:</strong>
+            To develop talented players, promote attractive attacking football, and 
+            positively impact the community through discipline, teamwork, and opportunity. <br>
+
+            <strong>Vision:</strong>
+            To become a leading football club in Bukasa known for excellence in player development,
+             competitive success, and strong community support.
+          </p>
         </div>
       </div>
     </section>
@@ -1036,33 +975,7 @@
       </div>
     </section>
 
-    <!-- ========== DOCUMENTS SECTION ========== -->
-    <section id="docs">
-      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; margin-bottom: 20px;">
-        <h2 style="margin-bottom: 0;">Club Documents</h2>
-        <button id="addDocumentBtn" class="btn btn-gold"><i class="fas fa-plus"></i> Add New Document</button>
-      </div>
-      <div id="officialDocsContainer" class="docs-grid"></div>
-
-      <div style="margin-top: 48px;">
-        <h2>Player Document Submissions</h2>
-        <div class="player-upload-section">
-          <div class="flex-forms">
-            <div class="upload-box">
-              <input type="text" id="playerName" placeholder="Player Full Name">
-              <input type="file" id="playerDocUpload" accept=".pdf,.docx,.jpg,.png">
-              <button id="submitPlayerDocBtn" class="btn btn-gold">Submit Document</button>
-            </div>
-            <div class="upload-box">
-              <p><strong>📌 How it works</strong><br>Submit your contract or supporting document. After submission, the file will appear below with a download button.</p>
-            </div>
-          </div>
-          <div id="playerSubmissionsList" class="submissions-list"></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Contact Section -->
+    <!-- Contact Section - Fully Responsive Redesign -->
     <section id="contact">
       <h2>Contact Us</h2>
       <div class="contact-flex">
@@ -1076,7 +989,9 @@
         </div>
         <div class="contact-info-box">
           <div class="map-container" style="width: 100%; height: 100%;">
-            <iframe style="width: 100%; height: 100%;" src="https://maps.google.com/maps?q=Muyenga-Bukasa%2C%20Kampala%2C%20Uganda&t=&z=14&ie=UTF8&iwloc=&output=embed" allowfullscreen="" loading="lazy"></iframe>
+            <iframe style="width: 100%; height: 100%;" src="https://maps.google.com/maps?q=Muyenga-Bukasa%2C%20Kampala%2C%20Uganda&t=&z=14&ie=UTF8&iwloc=&output=embed" 
+              allowfullscreen="" 
+              loading="lazy"></iframe>
           </div>
           <div class="contact-details">
             <p><i class="fas fa-map-marker-alt"></i> Muyenga-Bukasa, Kampala District.</p>
@@ -1100,7 +1015,7 @@
   </div>
 </main>
 
-<!-- Enhanced Footer -->
+<!-- Enhanced Footer with all links -->
 <footer class="footer">
   <div class="container">
     <div class="footer-grid">
@@ -1119,6 +1034,7 @@
           <li><a href="#">Membership</a></li>
           <li><a href="#">Hospitality</a></li>
           <li><a href="#">Official Sponsors</a></li>
+          <li><a href="#">Fan Wall of Fame</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -1126,6 +1042,8 @@
         <ul>
           <li><a href="#">Match Ground Guide</a></li>
           <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms & Conditions</a></li>
+          <li><a href="#">Accessibility</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -1134,6 +1052,7 @@
           <a href="#"><i class="fab fa-whatsapp"></i></a>
           <a href="#"><i class="fab fa-instagram"></i></a>
           <a href="#"><i class="fab fa-youtube"></i></a>
+          <a href="#"><i class="fab fa-tiktok"></i></a>
         </div>
         <p style="margin-top: 20px;"><i class="fas fa-envelope"></i> stormfc@gmail.com</p>
         <p><i class="fas fa-phone"></i> +256778402181</p>
@@ -1146,7 +1065,9 @@
 </footer>
 
 <div class="whatsapp-float">
-  <a href="https://wa.me/+256778402181" target="_blank"><i class="fab fa-whatsapp"></i></a>
+  <a href="https://wa.me/+256778402181?text=Hello%20TechwithCymon%2C%20I%27m%20interested%20in%20your%20services!" target="_blank" aria-label="Chat on WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
 </div>
 
 <!-- Modal -->
@@ -1154,75 +1075,139 @@
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script>
-  // ========== ORIGINAL CLUB DATA ==========
+  // EXTENDED SQUAD (16 Players)
   const corePlayers = [
-    { id:1, name: "Odok Simon Peter", position: "Center Back", number: 5, age:26, nationality:"Ugandan", bio:"Top defender", img: "images/pit1.jpg" },
-    { id:2, name: "Mazune Isaac", position: "Left Back", number: 3, age:32, nationality:"Ugandan", bio:"Creative wing back", img: "images/isaac.jpeg" },
-    { id:3, name: "Mwandha Sharif", position: "Center Back", number: 16, age:26, nationality:"Ugandan", bio:"Leading defender", img: "images/shaq2.jpg" },
-    { id:4, name: "Ssenyonjo Bashir", position: "Striker", number: 10, age:27, nationality:"Ugandan", bio:"Fans favorite", img: "images/basha.jpeg" }
+    { id:1, name: "Odok Simon Peter", position: "Center Back", number: 5, age:26, nationality:"Ugandan", bio:"Top defender with the ability to command the team. Known for pace and interceptions.", img: "images/pit1.jpg", photos: ["images/pit1.jpg", "images/pit2.jpg", "images/pit3.jpg"] },
+    { id:2, name: "Mazune Isaac", position: "Left Back", number: 3, age:32, nationality:"Ugandan", bio:"Creative wing back, leads assists chart. Engine of the team.", img: "images/isaac.jpeg", photos: ["images/isaac.jpeg", "images/izo.jpeg", "images/izo1.jpeg"] },
+    { id:3, name: "Mwandha Sharif", position: "Center Back", number: 16, age:26, nationality:"Ugandan", bio:"Leading defender for the club, rock at the back. .", img: "images/shaq2.jpg", photos: ["images/shaq2.jpg","images/shaq1.jpg","images/shaq.jpg"] },
+    { id:4, name: "Ssenyonjo Bashir", position: "Striker", number: 10, age:27, nationality:"Ugandan", bio:"Engine of the team upfront, interceptions, passing ability. Fans favorite.", img: "images/basha.jpeg", photos: ["images/basha.jpeg", "images/basha1.jpeg", "images/basha.jpeg"] }
   ];
   const additionalPlayers = [];
   const allPlayers = [...corePlayers, ...additionalPlayers];
   const coaches = [
-    { id:101, name: "Onen Richard Rashid", role: "Head Coach", bio:"Tactical mastermind", img: "images/onen.jpeg" },
-    { id:102, name: "Ssenyonjo Bashir", role: "Assistant Coach", bio:"Focuses on attacking", img: "images/basha1.jpeg" }
+    { id:101, name: "Onen Richard Rashid", role: "Head Coach", bio:"Former Kibuli united coach, joined 2021. Tactical mastermind.", img: "images/onen.jpeg" },
+    { id:102, name: "Ssenyonjo Bashir", role: "Assistant Coach", bio:"Fufa Pro License, focuses on attacking patterns.", img: "images/basha1.jpeg" }
   ];
   const newsArticles = [
-    { id:1, title: "Match Report: Victory 3-1", date: "Apr 10, 2026", category: "Match Report", summary: "Hat-trick from Bashir", full:"Bashir netted three goals", img: "images/basha1.jpeg" },
-    { id:2, title: "Defender extends stay", date: "Apr 5, 2026", category: "Announcement", summary: "Odok commits until 2029", full:"Signed 3-year deal", img: "images/pit1.jpg" },
-    { id:3, title: "Captain Interview", date: "Mar 28, 2026", category: "Interview", summary: "We are ready", full:"Squad is united", img: "images/shaq2.jpg" }
+    { id:1, title: "Match Report: Victory against rivals Bukasa united 3-1", date: "Apr 10, 2026", category: "Match Report", summary: "Hat-trick from Ssenyonjo Bashir secures derby glory at home.", full:"Okello Bashir netted three second-half goals in front of the fans.", img: "images/basha1.jpeg" },
+    { id:2, title: "Defender Odok Simon Peter extends his stay at the club", date: "Apr 5, 2026", category: "Announcement", summary: "27-year-old defender commits until 2029.", full:"Odok Simon Peter signed a 3-year deal with the club.", img: "images/pit1.jpg" },
+    { id:3, title: "Interview: Captain Talks regional Ambitions", date: "Mar 28, 2026", category: "Interview", summary: "We are ready for the next phase of our campaign.", full:"Captain Mazune Isaac: 'The squad is united, we believe we can go all the way.'", img: "images/shaq2.jpg" }
   ];
   const upcoming = [
     { opponent: "Wolves fc", date: "Apr 18, 2026 - 15:00", venue: "Soya police", comp: "6th division league" },
-    { opponent: "Bukasa united", date: "Apr 25, 2026 - 17:30", venue: "St.Janan pitch", comp: "6th division league" }
+    { opponent: "Bukasa united", date: "Apr 25, 2026 - 17:30", venue: "St.Janan pitch", comp: "6th division league" },
+    { opponent: "Harmers fc", date: "May 2, 2026 - 15:00", venue: "Mess", comp: "6th division league" }
   ];
   const pastResults = [
-    { opponent: "Bukasa united", score: "2-3", result: "Win", date: "Apr 5, 2026", goals: "Bashir (2)" }
+    { opponent: "Bukasa united", score: "2-3", result: "Win", date: "Apr 5, 2026", goals: "Bashir (2), Isaac" },
+    { opponent: "Harmers fc", score: "1-1", result: "Draw", date: "Mar 29, 2026", goals: "Sharif" },
+    { opponent: "Wolves fc", score: "0-2", result: "Win", date: "Mar 22, 2026", goals: "Bashir, Sharif" }
   ];
   const leagueTeams = [
     { pos:1, team:"Storm Fc", pld:28, win:18, draw:6, loss:4, gf:52, ga:24, pts:60 },
-    { pos:2, team:"Wolves Fc", pld:28, win:16, draw:7, loss:5, gf:48, ga:27, pts:55 }
+    { pos:2, team:"Wolves Fc", pld:28, win:16, draw:7, loss:5, gf:48, ga:27, pts:55 },
+    { pos:3, team:"Harmers Fc", pld:27, win:15, draw:5, loss:7, gf:44, ga:30, pts:50 },
+    { pos:4, team:"Bukasa united", pld:28, win:13, draw:8, loss:7, gf:41, ga:33, pts:47 },
+    { pos:5, team:"Namuwongo united", pld:28, win:12, draw:6, loss:10, gf:39, ga:38, pts:42 }
   ];
   const galleryImages = ["images/isaac.jpeg","images/pit1.jpg","images/basha.jpeg","images/shaq2.jpg"];
   const matchVideoItems = [
-    { id: 'vid1', source: 'youtube', title: 'Storm FC Highlights', description: 'Match highlights', src: 'https://www.youtube.com/embed/dQw4w9WgXcQ' }
+    { id: 'vid1', source: 'youtube', title: 'Storm FC vs Bukasa United', description: 'Full match highlight of the decisive winner scored in the final minutes. Watch the build-up, tactical play, and celebration.', src: 'https://www.youtube.com/embed/dQw4w9WgXcQ' },
+    { id: 'vid2', source: 'youtube', title: 'Training Session Preview', description: 'Behind-the-scenes look at our latest training drill, squad preparation, and coach commentary ahead of the next league fixture.', src: 'https://www.youtube.com/embed/dQw4w9WgXcQ' },
+    { id: 'vid3', source: 'youtube', title: 'Top Goals & Saves', description: 'Watch the best moments from recent games: powerful strikes, quick transitions, and incredible saves.', src: 'https://www.youtube.com/embed/dQw4w9WgXcQ' }
   ];
   let uploadedVideos = JSON.parse(localStorage.getItem('stormfc_uploaded_videos')) || [];
 
-  // Original rendering functions
   function renderInitialPlayers() {
-    document.getElementById('playersGrid').innerHTML = corePlayers.map(p => `<div class="card" onclick="openPlayerModal(${p.id})"><img class="card-img" src="${p.img}"><div class="card-content"><h3>${p.name}</h3><p>${p.position} • #${p.number}</p></div></div>`).join('');
+    document.getElementById('playersGrid').innerHTML = corePlayers.map(p => `<div class="card" onclick="openPlayerModal(${p.id})"><img class="card-img" src="${p.img}"><div class="card-content"><h3>${p.name}</h3><p>${p.position} • #${p.number}</p><small>Click for bio</small></div></div>`).join('');
+    document.getElementById('morePlayersContainer').innerHTML = additionalPlayers.map(p => `<div class="card" onclick="openPlayerModal(${p.id})"><img class="card-img" src="${p.img}"><div class="card-content"><h3>${p.name}</h3><p>${p.position} • #${p.number}</p><small>Click for bio</small></div></div>`).join('');
   }
+  
   function renderNews() {
-    document.getElementById('newsGrid').innerHTML = newsArticles.map(a => `<div class="card" onclick="openNewsModal(${a.id})"><img class="card-img" src="${a.img}"><div class="card-content"><span class="badge">${a.category}</span><h3>${a.title}</h3><p>${a.summary}</p><small>${a.date}</small></div></div>`).join('');
-    document.getElementById('allNewsContainer').innerHTML = newsArticles.map(a => `<div class="card" onclick="openNewsModal(${a.id})"><div class="card-content"><h3>${a.title}</h3><small>${a.date}</small></div></div>`).join('');
+    const container = document.getElementById('newsGrid');
+    container.innerHTML = newsArticles.map(a => `<div class="card" onclick="openNewsModal(${a.id})"><img class="card-img" src="${a.img}"><div class="card-content"><span class="badge">${a.category}</span><h3>${a.title}</h3><p>${a.summary}</p><small>${a.date}</small></div></div>`).join('');
+    document.getElementById('allNewsContainer').innerHTML = newsArticles.map(a => `<div class="card" onclick="openNewsModal(${a.id})"><img class="card-img" src="${a.img}"><div class="card-content"><h3>${a.title}</h3><p>${a.summary}</p><small>${a.date}</small></div></div>`).join('');
   }
+  
   function renderFixtures() {
-    document.getElementById('upcomingMatches').innerHTML = upcoming.map(m => `<div class="match-card"><div class="match-teams">${m.opponent}</div><div class="match-info">${m.date}<br>${m.venue}</div></div>`).join('');
-    document.getElementById('pastResults').innerHTML = pastResults.map(r => `<div class="match-card"><div>${r.opponent} ${r.score}</div></div>`).join('');
-    document.getElementById('leagueTable').innerHTML = `<table class="league-table"><tr><th>Pos</th><th>Team</th><th>Pts</th></tr>${leagueTeams.map(t=>`<tr><td>${t.pos}</td><td>${t.team}</td><td>${t.pts}</td></tr>`).join('')}</table>`;
+    document.getElementById('upcomingMatches').innerHTML = upcoming.map(m => `<div class="match-card"><div class="match-teams">🏆 ${m.comp}<br>${m.opponent}</div><div class="match-info">📅 ${m.date}<br>🏟️ ${m.venue}</div><div class="match-result">🔵 VS</div></div>`).join('');
+    document.getElementById('pastResults').innerHTML = pastResults.map(r => `<div class="match-card"><div class="match-teams">${r.opponent}</div><div class="match-info">${r.date}<br>⚽ ${r.goals}</div><div class="match-result" style="color:${r.result==='Win'?'#0B3D2E':'#C0392B'}">${r.score} (${r.result})</div></div>`).join('');
+    const leagueHtml = `<table class="league-table"><thead><tr><th>Pos</th><th>Team</th><th>Pld</th><th>W</th><th>D</th><th>L</th><th>GF</th><th>GA</th><th>GD</th><th>Pts</th></tr></thead><tbody>${leagueTeams.map(t=>`<tr class="${t.team==='Northshore United' ? 'team-highlight' : ''}"><td><strong>${t.pos}</strong></td><td>${t.team}</td><td>${t.pld}</td><td>${t.win}</td><td>${t.draw}</td><td>${t.loss}</td><td>${t.gf}</td><td>${t.ga}</td><td>${t.gf-t.ga}</td><td><strong>${t.pts}</strong></td></tr>`).join('')}</tbody>`;
+    document.getElementById('leagueTable').innerHTML = leagueHtml;
   }
+  
   function renderCoaches() {
-    document.getElementById('coachingStaff').innerHTML = coaches.map(c => `<div class="card"><img class="card-img" src="${c.img}"><div class="card-content"><h3>${c.name}</h3><p>${c.role}</p></div></div>`).join('');
+    document.getElementById('coachingStaff').innerHTML = coaches.map(c => `<div class="card" onclick="openCoachModal(${c.id})"><img class="card-img" src="${c.img}"><div class="card-content"><h3>${c.name}</h3><p>${c.role}</p><small>Click for details</small></div></div>`).join('');
   }
+  
   function renderMatchVideos() {
+    const grid = document.getElementById('videoGrid');
+    if (!grid) return;
     const allVideos = [...matchVideoItems, ...uploadedVideos];
-    document.getElementById('videoGrid').innerHTML = allVideos.map(v => `<div class="video-card"><div class="video-player">${v.source==='upload'? `<video controls src="${v.src}"></video>`:`<iframe src="${v.src}" allowfullscreen></iframe>`}</div><div class="video-content"><h3>${v.title}</h3></div></div>`).join('');
-  }
-  function renderGallery() {
-    const swiperWrapper = document.getElementById('gallerySwiper');
-    swiperWrapper.innerHTML = galleryImages.map(img => `<div class="swiper-slide"><img src="${img}"></div>`).join('');
-    new Swiper('.mySwiper', { loop: true, pagination: { el: '.swiper-pagination' }, navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' }, autoplay: { delay: 4000 } });
-    new Swiper('.heroSwiper', { loop: true, autoplay: { delay: 4000 }, pagination: { el: '.hero-pagination' }, navigation: { nextEl: '.hero-button-next', prevEl: '.hero-button-prev' } });
+    if (allVideos.length === 0) {
+      grid.innerHTML = '<p>No videos available yet.</p>';
+      return;
+    }
+    grid.innerHTML = allVideos.map(video => `
+      <div class="video-card">
+        <div class="video-player">
+          ${video.source === 'upload' ? `<video controls src="${video.src}"></video>` : `<iframe src="${video.src}" title="${video.title}" allowfullscreen></iframe>`}
+        </div>
+        <div class="video-content">
+          <h3>${escapeHtml(video.title)}</h3>
+          <p>${escapeHtml(video.description)}</p>
+        </div>
+      </div>
+    `).join('');
   }
 
-  window.openPlayerModal = (id) => { const p = allPlayers.find(pl => pl.id === id); if(p) document.getElementById('modalBody').innerHTML = `<h2>${p.name}</h2><p>${p.bio}</p>`; document.getElementById('modal').style.display = 'flex'; };
-  window.openNewsModal = (id) => { const a = newsArticles.find(n => n.id === id); document.getElementById('modalBody').innerHTML = `<h2>${a.title}</h2><p>${a.full}</p>`; document.getElementById('modal').style.display = 'flex'; };
+  function saveUploadedVideos() {
+    localStorage.setItem('stormfc_uploaded_videos', JSON.stringify(uploadedVideos));
+  }
+
+  function renderGallery() {
+    const swiperWrapper = document.getElementById('gallerySwiper');
+    swiperWrapper.innerHTML = galleryImages.map(img => `<div class="swiper-slide"><img src="${img}" alt="gallery"></div>`).join('');
+    new Swiper('.mySwiper', { loop: true, pagination: { el: '.swiper-pagination' }, navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' }, autoplay: { delay: 4000 } });
+    const heroContent = document.querySelector('.hero-content');
+    const heroSwiper = new Swiper('.heroSwiper', {
+      loop: true,
+      pagination: { el: '.hero-pagination' },
+      navigation: { nextEl: '.hero-button-next', prevEl: '.hero-button-prev' },
+      autoplay: { delay: 4500 },
+      speed: 1200
+    });
+    heroSwiper.on('slideChangeTransitionStart', () => heroContent?.classList.add('fade'));
+    heroSwiper.on('slideChangeTransitionEnd', () => heroContent?.classList.remove('fade'));
+  }
   
+  window.openPlayerModal = (id) => {
+    const p = allPlayers.find(pl => pl.id === id);
+    if(!p) return;
+    const photos = p.photos || [p.img];
+    const photoHtml = photos.map((src, index) => `<img src="${src}" class="player-photo-thumb${index===0 ? ' active' : ''}" onclick="document.querySelector('.player-modal-img').src='${src}'; document.querySelectorAll('.player-photo-thumb').forEach(t=>t.classList.remove('active')); this.classList.add('active');">`).join('');
+    document.getElementById('modalBody').innerHTML = `<div style="text-align:center"><img src="${p.img}" class="player-modal-img"><h2>${p.name}</h2><p><strong>#${p.number} | ${p.position}</strong></p><p>Age: ${p.age} | Nationality: ${p.nationality}</p><p>${p.bio}</p><p><i class="fas fa-chart-line"></i> Season stats: Elite performer</p><div class="player-photo-gallery">${photoHtml}</div></div>`;
+    document.getElementById('modal').style.display = 'flex';
+  };
+  window.openCoachModal = (id) => {
+    const c = coaches.find(co => co.id === id);
+    document.getElementById('modalBody').innerHTML = `<div style="text-align:center"><img src="${c.img}" class="player-modal-img"><h2>${c.name}</h2><p><strong>${c.role}</strong></p><p>${c.bio}</p><p>🏅 Coaching philosophy: Attack with discipline.</p></div>`;
+    document.getElementById('modal').style.display = 'flex';
+  };
+  window.openNewsModal = (id) => {
+    const article = newsArticles.find(n => n.id === id);
+    document.getElementById('modalBody').innerHTML = `<div><h2>${article.title}</h2><span class="badge">${article.category}</span><p style="margin-top:16px">${article.full}</p><small>${article.date}</small></div>`;
+    document.getElementById('modal').style.display = 'flex';
+  };
   document.getElementById('modalClose').onclick = () => document.getElementById('modal').style.display = 'none';
   window.onclick = (e) => { if(e.target === document.getElementById('modal')) document.getElementById('modal').style.display = 'none'; };
-  document.getElementById('contactForm').addEventListener('submit', (e) => { e.preventDefault(); alert('Thanks for reaching out!'); e.target.reset(); });
-  document.getElementById('subscribeBtnEnhanced').addEventListener('click', () => { document.getElementById('subMsgEnhanced').innerHTML = '✅ Subscribed!'; });
+  
+  document.getElementById('contactForm').addEventListener('submit', (e) => { e.preventDefault(); alert('Thanks for reaching out! We will respond soon.'); e.target.reset(); });
+  document.getElementById('subscribeBtnEnhanced').addEventListener('click', () => {
+    const email = document.getElementById('newsletterEmailEnhanced').value;
+    if(email) document.getElementById('subMsgEnhanced').innerHTML = '✅ Subscribed successfully! Check your inbox for welcome offer.';
+    else document.getElementById('subMsgEnhanced').innerHTML = '⚠️ Please enter a valid email address.';
+  });
   
   const hamburger = document.getElementById('hamburger');
   const navLinksEl = document.getElementById('navLinks');
@@ -1233,167 +1218,35 @@
       if (href.startsWith('#')) {
         e.preventDefault();
         navLinksEl.classList.remove('active');
-        document.getElementById(href.substring(1))?.scrollIntoView({ behavior: 'smooth' });
+        const targetId = href.substring(1);
+        document.getElementById(targetId)?.scrollIntoView({ behavior: 'smooth' });
       }
     });
   });
-
-  function escapeHtml(str) { return str.replace(/[&<>]/g, function(m){ if(m==='&') return '&amp;'; if(m==='<') return '&lt;'; if(m==='>') return '&gt;'; return m;}); }
-
-  // ========== DOCUMENTS SECTION LOGIC - YOU CAN ADD DOCUMENTS YOURSELF ==========
-  let officialDocs = JSON.parse(localStorage.getItem('stormfc_official_docs')) || [];
-  let playerSubmissions = JSON.parse(localStorage.getItem('stormfc_player_docs')) || [];
-
-  function getFileIcon(fileName) {
-    const ext = fileName.split('.').pop().toLowerCase();
-    if (ext === 'pdf') return 'fa-file-pdf';
-    if (ext === 'docx') return 'fa-file-word';
-    if (ext === 'jpg' || ext === 'jpeg' || ext === 'png') return 'fa-file-image';
-    return 'fa-file';
-  }
-
-  function renderOfficialDocs() {
-    const container = document.getElementById('officialDocsContainer');
-    if (officialDocs.length === 0) {
-      container.innerHTML = '<p style="color: var(--text-muted); text-align: center; grid-column: 1/-1;">No documents yet. Click "Add New Document" to upload your first document.</p>';
-      return;
-    }
-    container.innerHTML = officialDocs.map(doc => `
-      <div class="doc-card">
-        <div class="doc-icon"><i class="fas ${getFileIcon(doc.fileName)}"></i></div>
-        <div>
-          <div class="doc-title">${escapeHtml(doc.title)}</div>
-          <div class="doc-meta">${escapeHtml(doc.category || 'General')} • ${escapeHtml(doc.fileName)} • ${doc.date}</div>
-          ${doc.fileData ? `<button class="btn btn-outline btn-small" onclick="downloadDoc('${doc.id}')"><i class="fas fa-download"></i> Download</button>` : ''}
-          <button class="btn btn-danger btn-small" onclick="deleteDoc('${doc.id}')"><i class="fas fa-trash"></i> Delete</button>
-        </div>
-      </div>
-    `).join('');
-  }
-
-  function renderPlayerSubmissions() {
-    const list = document.getElementById('playerSubmissionsList');
-    if (playerSubmissions.length === 0) {
-      list.innerHTML = '<p style="color: var(--text-muted); text-align: center;">No player documents submitted yet.</p>';
-      return;
-    }
-    list.innerHTML = playerSubmissions.map(sub => `
-      <div class="submission-item">
-        <div><i class="fas ${getFileIcon(sub.fileName)}"></i> <strong>${escapeHtml(sub.playerName)}</strong></div>
-        <div class="doc-meta">${escapeHtml(sub.fileName)} • ${sub.date}</div>
-        <div>
-          <button class="btn btn-outline btn-small" onclick="downloadSubmission('${sub.id}')"><i class="fas fa-download"></i></button>
-          <button class="btn btn-danger btn-small" onclick="deleteSubmission('${sub.id}')"><i class="fas fa-trash"></i></button>
-        </div>
-      </div>
-    `).join('');
-  }
-
-  window.downloadDoc = (id) => {
-    const doc = officialDocs.find(d => d.id === id);
-    if (doc && doc.fileData) {
-      const a = document.createElement('a');
-      a.href = doc.fileData;
-      a.download = doc.fileName;
-      a.click();
-    } else {
-      alert('File not available for download');
-    }
-  };
-
-  window.downloadSubmission = (id) => {
-    const sub = playerSubmissions.find(s => s.id === id);
-    if (sub && sub.fileData) {
-      const a = document.createElement('a');
-      a.href = sub.fileData;
-      a.download = sub.fileName;
-      a.click();
-    }
-  };
-
-  window.deleteDoc = (id) => {
-    if (confirm('Are you sure you want to delete this document?')) {
-      officialDocs = officialDocs.filter(d => d.id !== id);
-      localStorage.setItem('stormfc_official_docs', JSON.stringify(officialDocs));
-      renderOfficialDocs();
-      alert('Document deleted');
-    }
-  };
-
-  window.deleteSubmission = (id) => {
-    if (confirm('Are you sure you want to delete this submission?')) {
-      playerSubmissions = playerSubmissions.filter(s => s.id !== id);
-      localStorage.setItem('stormfc_player_docs', JSON.stringify(playerSubmissions));
-      renderPlayerSubmissions();
-      alert('Submission deleted');
-    }
-  };
-
-  // Add new document - YOU control this
-  document.getElementById('addDocumentBtn').addEventListener('click', () => {
-    const title = prompt('Enter document title:');
-    if (!title) return;
-    const category = prompt('Enter category (General/Rules/Contract/Policy):', 'General');
-    const fileInput = document.createElement('input');
-    fileInput.type = 'file';
-    fileInput.accept = '.pdf,.docx,.jpg,.png,.jpeg';
-    fileInput.onchange = (e) => {
-      const file = e.target.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = (ev) => {
-          officialDocs.unshift({
-            id: Date.now().toString(),
-            title: title,
-            category: category || 'General',
-            fileName: file.name,
-            fileData: ev.target.result,
-            date: new Date().toLocaleString()
-          });
-          localStorage.setItem('stormfc_official_docs', JSON.stringify(officialDocs));
-          renderOfficialDocs();
-          alert('Document added successfully!');
-        };
-        reader.readAsDataURL(file);
-      }
-    };
-    fileInput.click();
+  
+  window.addEventListener('scroll', () => {
+    let current = '';
+    document.querySelectorAll('section').forEach(section => { if(pageYOffset >= section.offsetTop - 100) current = section.getAttribute('id'); });
+    document.querySelectorAll('.nav-link').forEach(link => { link.classList.remove('active'); if(link.getAttribute('href') === `#${current}`) link.classList.add('active'); });
+  });
+  
+  function escapeHtml(str) { return str.replace(/[&<>]/g, function(m){if(m==='&') return '&amp;'; if(m==='<') return '&lt;'; if(m==='>') return '&gt;'; return m;}); }
+  
+  // Add Load More functionality
+  let extraVisible = false;
+  document.getElementById('loadMorePlayers').addEventListener('click', () => {
+    const container = document.getElementById('morePlayersContainer');
+    container.classList.toggle('show');
+    extraVisible = !extraVisible;
+    document.getElementById('loadMorePlayers').innerHTML = extraVisible ? '<i class="fas fa-chevron-up"></i> Show Less' : '<i class="fas fa-users"></i> Show All First Team Players (16)';
   });
 
-  // Submit player document
-  document.getElementById('submitPlayerDocBtn').addEventListener('click', () => {
-    const name = document.getElementById('playerName').value.trim();
-    const fileInput = document.getElementById('playerDocUpload');
-    if (!name) { alert('Enter player name'); return; }
-    if (!fileInput.files.length) { alert('Select a file'); return; }
-    const file = fileInput.files[0];
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      playerSubmissions.unshift({
-        id: Date.now().toString(),
-        playerName: name,
-        fileName: file.name,
-        fileData: e.target.result,
-        date: new Date().toLocaleString()
-      });
-      localStorage.setItem('stormfc_player_docs', JSON.stringify(playerSubmissions));
-      renderPlayerSubmissions();
-      document.getElementById('playerName').value = '';
-      fileInput.value = '';
-      alert('Document submitted!');
-    };
-    reader.readAsDataURL(file);
-  });
-
-  // Initialize everything
-  renderInitialPlayers();
-  renderNews();
-  renderFixtures();
-  renderCoaches();
+  renderInitialPlayers(); 
+  renderNews(); 
+  renderFixtures(); 
+  renderCoaches(); 
+  renderGallery(); 
   renderMatchVideos();
-  renderGallery();
-  renderOfficialDocs();
-  renderPlayerSubmissions();
 </script>
 </body>
 </html>
